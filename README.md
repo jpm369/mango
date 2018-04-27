@@ -1,6 +1,9 @@
 # mango
 Extracts precursor masses from chimeric spectra of cleavable cross-linkers
 
+Compiling instructions:
+Navigate to /mango-master/ and run Make.
+
 Quick usage steps:
 1. Run mango.exe -p to generate mango.params.new. It must be renamed to mango.params for it to be used.
 2. Change params file to match acquistion method/cross-linker used.
