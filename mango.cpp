@@ -171,10 +171,11 @@ void PrintParams(void)
    }
 
    fprintf(fp, "# mango_version %s\n\n", mango_version);
-   fprintf(fp, "mass_tolerance_relationship = %0.2f              # PPM units; intact crosslink vs. 751 + mass1 + mass2\n", g_staticParams.tolerances.dToleranceRelationship);
+   fprintf(fp, "mass_tolerance_relationship = %0.2f              # PPM units; intact crosslink vs. reporter neutral + mass1 + mass2\n", g_staticParams.tolerances.dToleranceRelationship);
    fprintf(fp, "mass_tolerance_peptide = %0.2f                   # PPM units; mass1/mass2 vs. retrieved peptides from database\n", g_staticParams.tolerances.dTolerancePeptide);
-   fprintf(fp, "reporter_neutral_mass = %f\n", g_staticParams.options.dReporterMass);
+   fprintf(fp, "reporter_neutral_mass = %f                       # Mass offset used to solve relationship, default is for BDP-NHP\n", g_staticParams.options.dReporterMass);        
    fprintf(fp, "export_mgf = %d                                # 0=write MS2; 1=write MGF\n", g_staticParams.options.iExportMGF);
+   fprintf(fp, "isotope_offset = %d                            # Consider -n to +n C13 offsets for relationship\n", g_staticParams.options.iOffset);
    fprintf(fp, "\n");
    fprintf(fp, "#Hardklor pass through parameters for MS1 and MS2 scans\n");
    fprintf(fp, "instrument1 = %s\n", g_staticParams.options.szInstrument1);
@@ -338,6 +339,13 @@ void LoadParameters(char *pszParamsFile,
                szParamStringVal[0] = '\0';
                sprintf(szParamStringVal, "%d", iIntParam); 
                pSearchMgr->SetParam("export_mgf", szParamStringVal, iIntParam);
+            }
+            else if (!strcmp(szParamName, "isotope_offset"))
+            {  
+               sscanf(szParamVal, "%d", &iIntParam);
+               szParamStringVal[0] = '\0';
+               sprintf(szParamStringVal, "%d", iIntParam); 
+               pSearchMgr->SetParam("isotope_offset", szParamStringVal, iIntParam);
             }
             else
             {
