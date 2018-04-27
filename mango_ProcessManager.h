@@ -44,7 +44,8 @@ private:
    void GENERATE_HK(char *szHK);
    int WithinTolerance(double dMass1,
                        double dMass2,
-                       double dPPM);
+                       double dPPM,
+		       int iTolOffset=2);
 };
 
 #endif

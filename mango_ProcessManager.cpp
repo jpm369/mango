@@ -52,6 +52,7 @@ bool MangoSearchManager::InitializeStaticParams()
    GetParamValue("centroided1", g_staticParams.options.iCentroided1);
    GetParamValue("centroided2", g_staticParams.options.iCentroided2);
    GetParamValue("export_mgf", g_staticParams.options.iExportMGF);
+   GetParamValue("isotope_offset", g_staticParams.options.iOffset);
 
    return true;
 }
@@ -569,7 +570,7 @@ void MangoSearchManager::READ_HK2(char *szHK)
                      double dCombinedMass = pPeaks[i].dNeutralMass + pPeaks[ii].dNeutralMass + g_staticParams.options.dReporterMass;
 
 
-                     if (WithinTolerance(dCombinedMass, pvSpectrumList.at(iListCt).dHardklorPrecursorNeutralMass, g_staticParams.tolerances.dToleranceRelationship))
+                     if (WithinTolerance(dCombinedMass, pvSpectrumList.at(iListCt).dHardklorPrecursorNeutralMass, g_staticParams.tolerances.dToleranceRelationship, g_staticParams.options.iOffset))
                      {
                         if (pPeaks[i].iCharge + pPeaks[ii].iCharge <= pvSpectrumList.at(iListCt).iPrecursorCharge
                               && pPeaks[i].iCharge < pvSpectrumList.at(iListCt).iPrecursorCharge
@@ -753,18 +754,23 @@ void MangoSearchManager::GENERATE_HK(char *szHK)
 
 int MangoSearchManager::WithinTolerance(double dMass1,
                                         double dMass2,
-                                        double dPPM)
+                                        double dPPM,
+					int iTolOffset)
 {
-   if (dMass1 < 600.0 || dMass1 > 6000.0)  //FIX ... need to match this to hash range
+   int iInTolerance = 0;
+
+   if (dMass1 < 600.0 || dMass1 > 15000.0)  
       return 0;
-   if (dMass2 < 600.0 || dMass2 > 6000.0)
+   if (dMass2 < 600.0 || dMass2 > 15000.0)
       return 0;
 
-   if (     1E6 * fabs(dMass1              - dMass2)/dMass2 <= dPPM
-         || 1E6 * fabs(dMass1 +   1.003355 - dMass2)/dMass2 <= dPPM 
-         || 1E6 * fabs(dMass1 + 2*1.003355 - dMass2)/dMass2 <= dPPM 
-         || 1E6 * fabs(dMass1 -   1.003355 - dMass2)/dMass2 <= dPPM 
-         || 1E6 * fabs(dMass1 - 2*1.003355 - dMass2)/dMass2 <= dPPM)
+   for (int i=-iTolOffset; i<=iTolOffset;i++)
+   {
+      if (1E6 * fabs(dMass1 + i*1.003355 - dMass2)/dMass2 <= dPPM)
+          iInTolerance = 1;
+   }
+
+   if (iInTolerance)
       return 1;
    else
       return 0;

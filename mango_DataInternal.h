@@ -28,6 +28,7 @@ struct Options             // output parameters
    int iCentroided1;
    int iCentroided2;
    int iExportMGF;
+   int iOffset;
 
    Options& operator=(Options& a)
    {
@@ -37,6 +38,7 @@ struct Options             // output parameters
       iCentroided1 = a.iCentroided1;
       iCentroided2 = a.iCentroided2;
       iExportMGF = a.iExportMGF;
+      iOffset = a.iOffset;
       strcpy(szInstrument1, a.szInstrument1);
       strcpy(szInstrument2, a.szInstrument2);
       return *this;
@@ -58,7 +60,7 @@ struct ToleranceParams
    ToleranceParams()
    {
       dTolerancePeptide = 20;
-      dToleranceRelationship = 40;
+      dToleranceRelationship = 10;
    }
 
    ToleranceParams& operator=(ToleranceParams& a)
@@ -81,11 +83,12 @@ struct StaticParams
    StaticParams()
    {
       options.dReporterMass = 751.40508;
-      options.iResolution1 = 70000;
-      options.iResolution2 = 17500;
+      options.iResolution1 = 49505;
+      options.iResolution2 = 49505;
       options.iCentroided1 = 1;
       options.iCentroided2 = 1;
       options.iExportMGF = 0;
+      options.iOffset = 2;
       strcpy(options.szInstrument1, "Orbitrap");
       strcpy(options.szInstrument2, "Orbitrap");
    }
