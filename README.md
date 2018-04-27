@@ -3,7 +3,7 @@ Extracts precursor masses from chimeric spectra of cleavable cross-linkers
 
 Compiling instructions:
 Navigate to /mango-master/ or /mango/ (whatever directory contains the Makefile and Hardklor/mstoolkit directories) depending on how you 
-grabbed the repo and run Make.
+grabbed the repo and run Make. Depending on the environment you are running, you might have to compile hardklor separately. 
 
 Quick usage steps:
 1. Run mango.exe -p to generate mango.params.new. It must be renamed to mango.params for it to be used.
