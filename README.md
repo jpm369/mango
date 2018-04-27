@@ -12,30 +12,37 @@ file. If using a different search tool, use Mango's .mgf output, which stores th
 5. Pair results using spectrum title identifier. 
 
 Other notes:
+
 -Mango won't rerun hardklor if the appropriate .hk files are already in the directory. Hardklor is the majority of the runtime, so this
 makes it quick to rerun mango on the same set of files if some parameters are initially incorrect. Consequently, if you change the 
 hardklor passthrough parameters, you have to get rid of those .hk files first, or mango won't rerun hardklor. 
 
 Parameter notes:
+
 MANGO PARAMS
+
 -mass_tolerance_relationship: Determines what tolerance Mango will call a pair of masses as fulfilling the mass relationship. This
 relationship also considers a -2/-1/0/1/2 C13 offsets because deconvolution is not perfect, and sometimes the wrong peak is labeled
 as the monoisotopic. 
+
 -mass_tolerance_peptide: Determines the tolerance at which Mango will consider a pair of masses as different in the relationship. It 
 cuts down on redundancy by not having the same mass pair at slightly offset ppms reported many times in the same scan.
+
 -reporter_neutral_mass: Constant mass offset used to identify precursor masses. This is dependent entirely on the cross-linker used.
 The default mass is for BDP-NHP, and a derivation example for DSSO is provided in the supplement, that could be readily extended to
 any cross-linkers that have assymetric fragmentation (DSBU,DSSO, etc).
+
 -export_mgf: Writes an .ms2 file if this value is 0, writes a .mgf file if it is 1. The .mgf files are highly redundant and can
 be very large depending on how many relationships are found, as each potential precursor is written to an individual scan. Depending
 on the search software used, it might be necessary to break the .mgf into a few separate files, as some software struggles to read in
 very large files.
 
 HARDKLOR PARAMS 
+
 instrument1/2: Mass analyzer used for the ms1/ms2 scans. Usually Orbitrap or FTICR.
-resolution1/2: This is the resolution at 400 m/z. Depending on the type of instrument, the resolution specified in the method file refers
-to either resolution at 200 or 400 m/z. For most orbitrap instruments it is the value at 200 m/z, so divide the method resolution by 1.414
-to convert it to the resolution at 400 m/z. FTICRs report their resolution at 400 m/z, so they can be used without modification.
+
+resolution1/2: This is the resolution at 400 m/z. Depending on the type of instrument, the resolution specified in the method file refers to either resolution at 200 or 400 m/z. For most orbitrap instruments it is the value at 200 m/z, so divide the method resolution by 1.414 to convert it to the resolution at 400 m/z. FTICRs report their resolution at 400 m/z, so they can be used without modification.
+
 centroid1/2: This is a boolean indicating whether or not the input spectra are centroided or not.
 
 There are other hardklor params, but they are all hardcoded. You can see what they are the .conf1 and .conf2 files returned by Mango.
