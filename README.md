@@ -1,5 +1,6 @@
 # mango
-04/29/18 - Currently fixing some issues with the hardklor wrapper
+04/29/18 - Currently fixing some issues with the hardklor wrapper, as a quick fix you can add the /mango/hardklor folder to your path
+and that should work.
 
 Extracts precursor masses from chimeric spectra of cleavable cross-linkers
 
