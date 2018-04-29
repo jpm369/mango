@@ -746,7 +746,7 @@ void MangoSearchManager::GENERATE_HK(char *szHK)
    fclose(fp);
 
    printf("\n");
-   sprintf(szCmd, "hardklor/hardklor %s", szConf);
+   sprintf(szCmd, "hardklor %s", szConf);
    system(szCmd);
 }
 
