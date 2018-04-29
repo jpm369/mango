@@ -1,4 +1,6 @@
 # mango
+04/29/18 - Currently fixing some issues with the hardklor wrapper
+
 Extracts precursor masses from chimeric spectra of cleavable cross-linkers
 
 Compiling instructions:
