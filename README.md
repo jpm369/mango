@@ -1,6 +1,4 @@
 # mango
-04/29/18 - Currently fixing some issues with the hardklor wrapper, as a quick fix you can add the /mango/hardklor folder to your path
-and that should work.
 
 Extracts precursor masses from chimeric spectra of cleavable cross-linkers
 
@@ -8,14 +6,22 @@ Compiling instructions:
 Navigate to /mango-master/ or /mango/ (whatever directory contains the Makefile and Hardklor/mstoolkit directories) depending on how you 
 grabbed the repo and run Make. Depending on the environment you are running, you might have to compile hardklor separately. 
 
+Install notes: 
+After compiling, add the hardklor executable to your path environment as it's called directly by mango. Additionally, there are two
+lines in mango_ProcessManager.cpp (Lines 700,701) that specify the path of the hardklor .dat files used in the analysis. Those two lines
+need to be updated with the full path to where those files will be stored on your system (e.g. /usr/etc/hardklor.dat). After updating
+those lines in that file, it is necessary to recompile (run make clean followed by make) to update their path in the .conf file.
+At some point I hope to update this to make it slightly less cumbersome of an install process.
+
 Quick usage steps:
 1. Run mango.exe -p to generate mango.params.new. It must be renamed to mango.params for it to be used.
 2. Change params file to match acquistion method/cross-linker used.
-3. Run mango.exe on an mzXML, it will return a .hk1, .hk2, .peaks, and .ms2/.mgf (depending on export parameter). The .hk1/.hk2 files are
-hardklor's output for ms1/ms2 scans. The .peaks file lists the masses that fulfilled the mass relationship. The .ms2 contains the extracted
-precursor masses with their peaklist. The .ms2 is supported natively with Comet 2017 onwards, just add mango_search=1 to the comet.params
-file. If using a different search tool, use Mango's .mgf output, which stores the details to pair spectra in the spectrum title.
-4. Search data using comet or whatever other tool.
+3. Run mango.exe on an mzXML, it will return a .hk1, .hk2, .peaks, and .ms2/.mgf (depending on export parameter). The .hk1/.hk2 files
+are hardklor's output for ms1/ms2 scans. The .peaks file lists the masses that fulfilled the mass relationship. The .ms2 contains the
+extracted precursor masses with their peaklist. The .ms2 is supported natively with Comet 2017 onwards, just add mango_search=1 to the
+comet.params file. If using a different search tool, use Mango's .mgf output, which stores the details to pair spectra in the spectrum
+title.
+4. Search data using comet or whatever other tool (use mango_search=1 in the comet.params if using comet).
 5. Pair results using spectrum title identifier. 
 
 Other notes:
