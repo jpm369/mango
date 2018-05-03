@@ -698,8 +698,8 @@ void MangoSearchManager::GENERATE_HK(char *szHK)
    }
   
    fprintf(fp, "# Hardkor parameter file\n");
-   fprintf(fp, "isotope_data = /net/pr/vol1/ProteomicsResource/bin/hardklor_files/ISOTOPE.DAT\n");
-   fprintf(fp, "hardklor_data = /net/pr/vol1/ProteomicsResource/bin/hardklor_files/Hardklor.dat\n");
+   fprintf(fp, "isotope_data = ISOTOPE.DAT\n");
+   fprintf(fp, "hardklor_data = Hardklor.dat\n");
    fprintf(fp, "\n");
    fprintf(fp, "\n");
    fprintf(fp, "# Parameters used to described the data being input to Hardklor\n");
