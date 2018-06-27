@@ -1,5 +1,7 @@
 # mango
 
+This is the version described in the initial publication.
+
 Extracts precursor masses from chimeric spectra of cleavable cross-linkers
 
 Compiling instructions:
