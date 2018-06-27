@@ -1,6 +1,6 @@
 # mango
 
-Included binaries are for linux. 
+Now featuring 64bit windows binaries for mango/hardklor. 
 
 Put mango.exe, hardklor, ISOTOPE.dat, hardklor.dat into one directory, and it should run.
 
