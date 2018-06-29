@@ -1,6 +1,6 @@
 # mango
 
-Now featuring 64bit windows binaries for mango/hardklor. 
+Now featuring 64bit windows binaries and linux binaries for mango/hardklor. 
 
 Put mango.exe, hardklor, ISOTOPE.dat, hardklor.dat into one directory, and it should run.
 
@@ -10,12 +10,18 @@ Compiling instructions:
 Navigate to /mango-master/ or /mango/ (whatever directory contains the Makefile and Hardklor/mstoolkit directories) depending on how you 
 grabbed the repo and run Make. Depending on the environment you are running, you might have to compile hardklor separately. 
 
-Install notes: 
+Install notes:
+There are now compiled binaries, so just drop mango.exe, hardklor, ISOTOPE.DAT, hardklor.dat into a directory with MZXML files
+and it should be good to go. For linux systems, you still have to add Hardklor to your path environment or it will error out.
+For Windows it works as is.
+
+More comprehensive install instructions:
 After compiling, add the hardklor executable to your path environment as it's called directly by mango. Additionally, there are two
 lines in mango_ProcessManager.cpp (Lines 700,701) that specify the path of the hardklor .dat files used in the analysis. Those two lines
 need to be updated with the full path to where those files will be stored on your system (e.g. /usr/etc/hardklor.dat). After updating
-those lines in that file, it is necessary to recompile (run make clean followed by make) to update their path in the .conf file.
-At some point I hope to update this to make it slightly less cumbersome of an install process.
+those lines in that file, it is necessary to recompile (run make clean followed by make) to update their path in the .conf file. In the
+current version it looks in the active directory, so you'll have to have copies there.
+
 
 Quick usage steps:
 1. Run mango.exe -p to generate mango.params.new. It must be renamed to mango.params for it to be used.
@@ -38,9 +44,7 @@ Parameter notes:
 
 MANGO PARAMS
 
--mass_tolerance_relationship: Determines what tolerance Mango will call a pair of masses as fulfilling the mass relationship. This
-relationship also considers a -2/-1/0/1/2 C13 offsets because deconvolution is not perfect, and sometimes the wrong peak is labeled
-as the monoisotopic. 
+-mass_tolerance_relationship: Determines what tolerance Mango will call a pair of masses as fulfilling the mass relationship. 
 
 -mass_tolerance_peptide: Determines the tolerance at which Mango will consider a pair of masses as different in the relationship. It 
 cuts down on redundancy by not having the same mass pair at slightly offset ppms reported many times in the same scan.
@@ -53,6 +57,9 @@ any cross-linkers that have assymetric fragmentation (DSBU,DSSO, etc).
 be very large depending on how many relationships are found, as each potential precursor is written to an individual scan. Depending
 on the search software used, it might be necessary to break the .mgf into a few separate files, as some software struggles to read in
 very large files.
+
+-isotope_offset: Determines how many C13 peaks to consider in the relationship to account for errors in monoisotopic peak calling. 
+Considers -n to +n peaks for the relationship (2 or 3 will capture most true relationships with Hardklor). 
 
 HARDKLOR PARAMS 
 
