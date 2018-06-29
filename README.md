@@ -72,3 +72,5 @@ centroid1/2: This is a boolean indicating whether or not the input spectra are c
 There are other hardklor params, but they are all hardcoded. You can see what they are the .conf1 and .conf2 files returned by Mango.
 Note that changing these values in those .conf files won't do change the parameters used to run Hardklor, as they are overwritten
 whenever Mango runs Hardklor. The values used should work fairly well for the majority of experiments.
+
+Additional details on hardklor are available from: https://proteome.gs.washington.edu/software/hardklor/
