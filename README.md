@@ -1,5 +1,12 @@
 # mango
 
+072618 Update: Added some auxilary software to complete a pipeline from mzXML to fdr filtered cross-links. 
+Briefly, I've included comet binaries for a modified version of Comet that writes spectrum titles to its .txt output, as well as an
+R script that will process a directory of comet .txt output files and return paired xlinks at some estimated fdr. It uses the tcltk 
+library, so that needs to be installed to run it. Essentially, given an mzXML file, one can run mango file.mzXML, comet file.ms2, then
+run the R script in the directory where comet's output is. A test case is now included in TestCase/ which includes a subset of ~30 scans
+from an E.coli xlinking run so one can check that everything is working correctly on their system.
+
 Now featuring 64bit windows binaries and linux binaries for mango/hardklor. 
 
 Put mango.exe, hardklor, ISOTOPE.dat, hardklor.dat into one directory, and it should run.
