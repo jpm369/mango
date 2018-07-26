@@ -1,0 +1,16 @@
+# mango_version 2017.01 rev. 0 beta 3
+
+mass_tolerance_relationship = 10.00              # PPM units; intact crosslink vs. reporter neutral + mass1 + mass2
+mass_tolerance_peptide = 20.00                   # PPM units; mass1/mass2 vs. retrieved peptides from database
+reporter_neutral_mass = 751.405080                       # Mass offset used to solve relationship, default is for BDP-NHP
+export_mgf = 0                                # 0=write MS2; 1=write MGF
+isotope_offset = 2                            # Consider -n to +n C13 offsets for relationship
+
+#Hardklor pass through parameters for MS1 and MS2 scans
+instrument1 = Orbitrap
+resolution1 = 49505
+centroided1 = 1
+
+instrument2 = Orbitrap
+resolution2 = 49505
+centroided2 = 1
