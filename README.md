@@ -1,5 +1,9 @@
 # mango
 
+082118 Update: Xlinkprophet (https://github.com/brucelab/xlinkprophet) is now officially released and is compatible with the Mango/Comet
+pipeline described in the manuscript and here. Instructions for running xlinkprophet on output from Mango/Comet and a test case are
+included in that repository. Xlinkprophet takes .pep.xmls as an input. This is objectively better than the Rscript in post-processing.
+
 072618 Update: Added some auxilary software to complete a pipeline from mzXML to fdr filtered cross-links. 
 Briefly, I've included comet binaries for a modified version of Comet that writes spectrum titles to its .txt output (output_txtfile=1), 
 as well as an R script that will process a directory of comet .txt output files and return paired xlinks at some estimated fdr. It uses 
