@@ -1,5 +1,11 @@
 # mango
 
+021919 Update: There is a typo in figure S4 of the manuscript for the DSSO derivation. "Long arm modification: 85.94264" is incorrect,
+it should be "Long arm modification: 85.98264" instead. For DSSO searches you should use 85.98264 for the lysine mod in searches.
+The reporter masses in the derivation are correct still. I have also added some DSSO params files for mango+comet, they have to be
+renamed to mango.params and comet.params to work as usual. They have the correct masses for DSSO for mango and comet, the rest of the
+params you should change as appropriate for your experiment.
+
 082118 Update: Xlinkprophet (https://github.com/brucelab/xlinkprophet) is now officially released and is compatible with the Mango/Comet
 pipeline described in the manuscript and here. Instructions for running xlinkprophet on output from Mango/Comet and a test case are
 included in that repository. Xlinkprophet takes .pep.xmls as an input. This is objectively better than the Rscript in post-processing.
