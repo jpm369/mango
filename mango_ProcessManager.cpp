@@ -238,7 +238,10 @@ bool MangoSearchManager::DoAnalysis()
       // or larger?
       strcpy(szMZXML, g_pvInputFiles.at(i)->szFileName);
       strcpy(szHK1, szMZXML);
-      szHK1[strlen(szHK1)-5]='\0';
+      if (!strcmp(szMZXML+strlen(szMZXML)-6, ".mzXML"))
+          szHK1[strlen(szHK1)-5]='\0';
+      else if (!strcmp(szMZXML+strlen(szMZXML)-5, ".mzML"))
+          szHK1[strlen(szHK1)-4]='\0';
       strcpy(szHK2, szHK1);
       strcat(szHK1, "hk1");        // ms1 hardklor run
       strcat(szHK2, "hk2");        // ms2 hardklor run
@@ -247,10 +250,10 @@ bool MangoSearchManager::DoAnalysis()
       READ_MZXMLSCANS(szMZXML);
 
       // Next, go to Hardklor .hk1 file to get accurate precursor m/z
-      READ_HK1(szHK1);
+      READ_HK1(szHK1, szMZXML);
 
       // Now, read through .hk2 file to find accurate peptide masses that add up to precursor
-      READ_HK2(szHK2);
+      READ_HK2(szHK2, szMZXML);
 
       int iCount=0;
       for (int ii=0; ii<(int)pvSpectrumList.size(); ii++)
@@ -335,7 +338,7 @@ void MangoSearchManager::READ_MZXMLSCANS(char *szMZXML)
 }
 
 
-void MangoSearchManager::READ_HK1(char *szHK)
+void MangoSearchManager::READ_HK1(char *szHK, char *szMZXML)
 {
    FILE *fp;
    char szBuf[SIZE_BUF];
@@ -348,7 +351,7 @@ void MangoSearchManager::READ_HK1(char *szHK)
    if ( (fp=fopen(szHK, "r"))== NULL)
    {
       // Cannot read Hardklor file; try to generate it.
-      GENERATE_HK(szHK);
+      GENERATE_HK(szHK,szMZXML);
 
       // Instead of reporting error above, generate HK1 file here.
       // This requires creating a Hardklor params file and executing hardklor.
@@ -455,7 +458,7 @@ void MangoSearchManager::READ_HK1(char *szHK)
 }
 
 
-void MangoSearchManager::READ_HK2(char *szHK)
+void MangoSearchManager::READ_HK2(char *szHK,  char *szMZXML)
 {
    FILE *fp;
    char szBuf[SIZE_BUF];
@@ -468,7 +471,7 @@ void MangoSearchManager::READ_HK2(char *szHK)
    if ( (fp=fopen(szHK, "r"))== NULL)
    {
       // Cannot read Hardklor file; try to generate it.
-      GENERATE_HK(szHK);
+      GENERATE_HK(szHK,szMZXML);
 
       // Instead of reporting error above, generate HK1 file here.
       // This requires creating a Hardklor params file and executing hardklor.
@@ -650,7 +653,7 @@ void MangoSearchManager::READ_HK2(char *szHK)
 }
 
 
-void MangoSearchManager::GENERATE_HK(char *szHK)
+void MangoSearchManager::GENERATE_HK(char *szHK, char *szMZXML)
 {
    int iResolution;
    int iCentroided;
@@ -742,7 +745,9 @@ void MangoSearchManager::GENERATE_HK(char *szHK)
    fprintf(fp, "distribution_area = 0\n");
    fprintf(fp, "xml = 0\n");
    fprintf(fp, "\n");
-   fprintf(fp, "%s.mzXML %s.hk%d\n", szBaseName, szBaseName, iMSLevel);
+   //need check for file type so .conf files point to right mzML/mzXML
+   fprintf(fp, "%s %s.hk%d\n", szMZXML, szBaseName, iMSLevel);
+
 
    fclose(fp);
 

@@ -39,9 +39,9 @@ private:
    std::map<std::string, MangoParam*> _mapStaticParams;
 
    void READ_MZXMLSCANS(char *szMZXML);
-   void READ_HK1(char *szHK);
-   void READ_HK2(char *szHK);
-   void GENERATE_HK(char *szHK);
+   void READ_HK1(char *szHK, char *szMZXML);
+   void READ_HK2(char *szHK, char *szMZXML);
+   void GENERATE_HK(char *szHK, char *szMZXML);
    int WithinTolerance(double dMass1,
                        double dMass2,
                        double dPPM,

@@ -35,7 +35,7 @@ void mango_Process::ProcessData(char *szMZXML)
    strcpy(szBaseName, szMZXML);
    if (!strcmp(szBaseName+strlen(szBaseName)-6, ".mzXML"))
       szBaseName[strlen(szBaseName)-6]='\0';
-   else if (!strcmp(szBaseName+strlen(szBaseName)-6, ".mzML"))
+   else if (!strcmp(szBaseName+strlen(szBaseName)-5, ".mzML"))
       szBaseName[strlen(szBaseName)-5]='\0';
 
    if (1)
