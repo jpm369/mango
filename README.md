@@ -1,4 +1,7 @@
 # mango
+061621 Update: Not a software update, but Mango/Comet/Xlinkprophet is fully compatible with Bruker TimsTOF data. We had good results using
+the tdf2mzml converter (https://github.com/mafreitas/tdf2mzml) to generate the mzML. Use instrument = TOF and resolution = 35000 for hardklor
+in the mango.params.
 
 021919 Update: There is a typo in figure S4 of the manuscript for the DSSO derivation. "Long arm modification: 85.94264" is incorrect,
 it should be "Long arm modification: 85.98264" instead. For DSSO searches you should use 85.98264 for the lysine mod in searches.
