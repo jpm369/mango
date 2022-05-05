@@ -1,30 +1,11 @@
 # mango
-061621 Update: Not a software update, but Mango/Comet/Xlinkprophet is fully compatible with Bruker TimsTOF data. We had good results using
-the tdf2mzml converter (https://github.com/mafreitas/tdf2mzml) to generate the mzML. Use instrument = TOF and resolution = 35000 for hardklor
-in the mango.params.
 
-021919 Update: There is a typo in figure S4 of the manuscript for the DSSO derivation. "Long arm modification: 85.94264" is incorrect,
-it should be "Long arm modification: 85.98264" instead. For DSSO searches you should use 85.98264 for the lysine mod in searches.
-The reporter masses in the derivation are correct still. I have also added some DSSO params files for mango+comet, they have to be
-renamed to mango.params and comet.params to work as usual. They have the correct masses for DSSO for mango and comet, the rest of the
-params you should change as appropriate for your experiment.
+Extracts precursor masses from chimeric spectra of cleavable cross-linkers. Outputs a .ms2 file containing all spectra that precursor 
+pairs were detected for, with each spectrum annotated with two precursor masses for each mass relationship found in that spectrum.
 
-082118 Update: Xlinkprophet (https://github.com/brucelab/xlinkprophet) is now officially released and is compatible with the Mango/Comet
-pipeline described in the manuscript and here. Instructions for running xlinkprophet on output from Mango/Comet and a test case are
-included in that repository. Xlinkprophet takes .pep.xmls as an input. This is objectively better than the Rscript in post-processing.
-
-072618 Update: Added some auxilary software to complete a pipeline from mzXML to fdr filtered cross-links. 
-Briefly, I've included comet binaries for a modified version of Comet that writes spectrum titles to its .txt output (output_txtfile=1), 
-as well as an R script that will process a directory of comet .txt output files and return paired xlinks at some estimated fdr. It uses 
-the tcltk library, so that needs to be installed to run it. Essentially, given an mzXML file, one can run mango file.mzXML, comet 
-file.ms2, then run the R script in the directory where comet's output is. A test case is now included in TestCase/ which includes a 
-subset of ~30 scans from an E.coli xlinking run so one can check that everything is working correctly on their system.
-
-Now featuring 64bit windows binaries and linux binaries for mango/hardklor. 
+Now includes 64bit windows binaries and linux binaries for mango/hardklor. 
 
 Put mango.exe, hardklor, ISOTOPE.dat, hardklor.dat into one directory, and it should run.
-
-Extracts precursor masses from chimeric spectra of cleavable cross-linkers
 
 Compiling instructions:
 Navigate to /mango-master/ or /mango/ (whatever directory contains the Makefile and Hardklor/mstoolkit directories) depending on how you 
@@ -94,3 +75,26 @@ Note that changing these values in those .conf files won't do change the paramet
 whenever Mango runs Hardklor. The values used should work fairly well for the majority of experiments.
 
 Additional details on hardklor are available from: https://proteome.gs.washington.edu/software/hardklor/
+
+Release notes:
+
+061621 Update: Not a software update, but Mango/Comet/Xlinkprophet is fully compatible with Bruker TimsTOF data. We had good results using
+the tdf2mzml converter (https://github.com/mafreitas/tdf2mzml) to generate the mzML. Use instrument = TOF and resolution = 35000 for hardklor
+in the mango.params.
+
+021919 Update: There is a typo in figure S4 of the manuscript for the DSSO derivation. "Long arm modification: 85.94264" is incorrect,
+it should be "Long arm modification: 85.98264" instead. For DSSO searches you should use 85.98264 for the lysine mod in searches.
+The reporter masses in the derivation are correct still. I have also added some DSSO params files for mango+comet, they have to be
+renamed to mango.params and comet.params to work as usual. They have the correct masses for DSSO for mango and comet, the rest of the
+params you should change as appropriate for your experiment.
+
+082118 Update: Xlinkprophet (https://github.com/brucelab/xlinkprophet) is now officially released and is compatible with the Mango/Comet
+pipeline described in the manuscript and here. Instructions for running xlinkprophet on output from Mango/Comet and a test case are
+included in that repository. Xlinkprophet takes .pep.xmls as an input. This is objectively better than the Rscript in post-processing.
+
+072618 Update: Added some auxilary software to complete a pipeline from mzXML to fdr filtered cross-links. 
+Briefly, I've included comet binaries for a modified version of Comet that writes spectrum titles to its .txt output (output_txtfile=1), 
+as well as an R script that will process a directory of comet .txt output files and return paired xlinks at some estimated fdr. It uses 
+the tcltk library, so that needs to be installed to run it. Essentially, given an mzXML file, one can run mango file.mzXML, comet 
+file.ms2, then run the R script in the directory where comet's output is. A test case is now included in TestCase/ which includes a 
+subset of ~30 scans from an E.coli xlinking run so one can check that everything is working correctly on their system.
